@@ -8,18 +8,19 @@ export default function Form({ items, setItems, quantitySelection }) {
     if (!description) {
       return;
     }
-    function handleAddItems(newItem) {
-      setItems([...items, newItem]);
-    }
 
     const newItem = { id: Date.now(), description, quantity, packed: false };
     setDescription("");
     setQuantity(1);
     handleAddItems(newItem);
+
+    function handleAddItems(newItem) {
+      setItems([...items, newItem]);
+    }
   }
 
   return (
-    <form className="add-form" onSubmit={(e) => handleSubmit(e)}>
+    <form className="form" onSubmit={(e) => handleSubmit(e)}>
       <h3>What do you need for your trip 💼 ?</h3>
       <select
         value={quantity}

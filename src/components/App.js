@@ -1,6 +1,6 @@
 import Logo from "./Logo";
 import Form from "./Form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../App.css";
 import PackingList from "./PackingList";
 import Stats from "./Stats";
@@ -10,7 +10,14 @@ const quantitySelection = [
 ];
 
 function App() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(() => {
+    const storedItems = localStorage.getItem("items");
+    return storedItems ? JSON.parse(storedItems) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
 
   function handleDeleteItem(id) {
     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
@@ -25,7 +32,7 @@ function App() {
 
   return (
     <div className="app">
-      <Logo />;
+      <Logo />
       <Form
         items={items}
         setItems={setItems}
