@@ -22,6 +22,13 @@ export default function Form({ items, setItems, quantitySelection }) {
   return (
     <form className="form" onSubmit={(e) => handleSubmit(e)}>
       <h3>What do you need for your trip 💼 ?</h3>
+      <input
+        type="text"
+        placeholder="Item name ..."
+        value={description}
+        onChange={(event) => setDescription(event.target.value)}
+      ></input>
+
       <select
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
@@ -32,12 +39,7 @@ export default function Form({ items, setItems, quantitySelection }) {
           </option>
         ))}
       </select>
-      <input
-        type="text"
-        placeholder="Item ..."
-        value={description}
-        onChange={(event) => setDescription(event.target.value)}
-      ></input>
+
       <button>Add</button>
     </form>
   );

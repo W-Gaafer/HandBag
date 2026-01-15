@@ -24,24 +24,30 @@ export default function PackingList(props) {
 
   return (
     <div className="list">
-      <ul>
-        {sortedItems.map((item) => (
-          <Item
-            item={item}
-            key={item.id}
-            handleDeleteItem={props.handleDeleteItem}
-            handleToggleItem={props.handleToggleItem}
-          />
-        ))}
-      </ul>
-      <div className="actions">
-        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-          <option value="input">Sort by input order</option>
-          <option value="description"> Sort by description</option>
-          <option value="packed">Sort by packing status</option>
-        </select>
-        <button onClick={() => handleClearList()}>Clear List</button>
-      </div>
+      {sortedItems.length === 0 ? (
+        "Your items list is empty ..."
+      ) : (
+        <>
+          <ul>
+            {sortedItems.map((item) => (
+              <Item
+                item={item}
+                key={item.id}
+                handleDeleteItem={props.handleDeleteItem}
+                handleToggleItem={props.handleToggleItem}
+              />
+            ))}
+          </ul>
+          <div className="actions">
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <option value="input">Sort by input order</option>
+              <option value="description"> Sort by description</option>
+              <option value="packed">Sort by packing status</option>
+            </select>
+            <button onClick={() => handleClearList()}>Clear List</button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
